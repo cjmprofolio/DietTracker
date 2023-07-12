@@ -1,0 +1,33 @@
+.header {
+    text-align: start;
+    width: 20%;
+}
+
+.cells {
+    text-align: left;
+    vertical-align: middle;
+    width: 20%;
+}
+table {
+    width: 100%;
+  }
+
+.expand-th {
+    width: 15%;
+}
+
+.expand-td {
+    width: 15%;
+}
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+tr.example-detail-row {
+    height: 0;
+}

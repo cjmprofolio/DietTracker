@@ -1,0 +1,65 @@
+<div class="d-flex px-sm-3 py-md-3 justify-content-start">
+  <div>
+    <h4>Add new restaurant</h4>
+    <form [formGroup]="restaurantForm" (ngSubmit)="addRestaurant(restaurantForm.value)">
+      <div class="add-restaurant">
+        <mat-form-field appearance="fill" hintLabel="Max 20 characters">
+          <mat-label>Enter name</mat-label>
+          <input matInput #shop maxlength="20" placeholder="Ex. home" formControlName="shop_name">
+          <mat-hint align="end">{{shop.value.length}}/20</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field hintLabel="Max 50 characters">
+          <mat-label>Enter locatioin</mat-label>
+          <input matInput #location maxlength="50" placeholder="Ex. home" formControlName="location">
+          <mat-hint align="end">{{location.value.length}}/50</mat-hint>
+        </mat-form-field>
+
+        <button type="submit" mat-button [disabled]="!restaurantForm.valid">Submit</button>
+
+      </div>
+    </form>
+    <hr>
+    <h5>Restaurant list</h5>
+    <mat-form-field id="filter">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. home" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="shop_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Restaurant </th>
+          <td mat-cell *matCellDef="let row"> {{row.shop_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+          <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expanded">
+          <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+          <td mat-cell *matCellDef="let element" class="expand-td">
+            <button mat-icon-button (click)="deleteRestaurant(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[2, 5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      
+    </div>
+  </div>
+</div>

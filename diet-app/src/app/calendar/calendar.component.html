@@ -1,0 +1,5 @@
+<mat-card>
+    <mat-calendar [(selected)]="selected" (selectedChange)="dateSelected($event)"  #datepicker></mat-calendar>
+</mat-card>
+<p>Selected date: {{ selected | date }}</p>
+<button mat-stroked-button color="primary" (click)="dateReset()">Reset</button>

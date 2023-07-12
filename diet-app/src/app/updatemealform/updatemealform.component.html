@@ -1,0 +1,86 @@
+<h4 class="mb-3" *ngIf="!hiddenControl">Mealform</h4>
+<form class="mx-3 mb-3" [formGroup]="mealform" (ngSubmit)="onSubmit(mealform.value)">
+    <div class="mb-3" *ngIf="!hiddenControl">
+        <mat-form-field appearance="fill">
+            <mat-label>Meal</mat-label>
+            <mat-select formControlName="meal" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let option of mealOptions" [value]="option.value">
+                    {{ option.value }}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix></mat-icon>
+            <mat-hint>Choose when you ate</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="food-header">
+        <h5>Food</h5>
+        <button type="button" mat-flat-button (click)="addFoodarr()" class="add-button">
+            <mat-icon>add_box</mat-icon>
+        </button>
+    </div>
+    <div formArrayName="food">
+        <div *ngFor="let f of foodarray.controls;let i = index">
+            <mat-card class="mb-3">
+                <mat-card-header class="mb-2">
+                    <mat-card-title>dish-{{i+1}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                <div [formGroupName]="i">
+                    <mat-form-field appearance="fill" class="me-2 mb-3">
+                        <mat-label>Restaurant</mat-label>
+                        <mat-select formControlName="restaurant" [compareWith]="compareCategoryObjects" [errorStateMatcher]="matcher">
+                            <mat-option *ngFor="let item of allRests" [value]="item">
+                                {{ item.shop_name }}-{{ item.location }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>restaurant</mat-icon>
+                        <mat-hint>Choose where you ate</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="me-2 mb-3" hintLabel="Text what you ate">
+                        <mat-label>Food_name</mat-label>
+                        <input matInput formControlName="food_name" #food_name [errorStateMatcher]="matcher">
+                        <mat-icon matSuffix>rice_bowl</mat-icon>
+                        <mat-hint align="end">{{food_name.value.length}}/30</mat-hint>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="me-2 mb-3">
+                        <mat-label>Ingredients</mat-label>
+                        <textarea matInput formControlName="ingredients" [errorStateMatcher]="matcher"></textarea>
+                        <mat-icon matSuffix>checklist</mat-icon>
+                        <mat-hint>Choose where you ate, sperated by comma</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="me-2 mb-3">
+                        <mat-label>Price</mat-label>
+                        <input matInput formControlName="price" #price [errorStateMatcher]="matcher">
+                        <span matTextPrefix>NT$&nbsp;</span>
+                        <mat-icon matSuffix>money</mat-icon>
+                        <mat-hint>How much it cost (min limit is 1)</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="me-2 mb-3">
+                        <mat-label>Calorie</mat-label>
+                        <input matInput formControlName="calorie" [errorStateMatcher]="matcher">
+                        <span matTextSuffix>kcal</span>
+                        <mat-icon matSuffix color="accent">local_fire_department</mat-icon>
+                        <mat-hint>How many calories (min limit is 1)</mat-hint>
+                    </mat-form-field>
+                    
+                </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button type="button" mat-flat-button (click)="addFoodarr()" class="add-button">
+                        <mat-icon>add_box</mat-icon>
+                    </button>
+                    <button type="button" mat-flat-button (click)="removeFoodarr(i)" class="remove-button">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>   
+    </div>
+    <div *ngIf="!hiddenControl">
+        <button type="submit" mat-stroked-button color="accent" [disabled]="!mealform.valid">Submit</button>
+    </div>
+    <div *ngIf="hiddenControl">
+        <button type="submit" mat-stroked-button color="warn" [disabled]="!mealform.valid || !mealform.dirty">Update</button>
+    </div>
+</form>

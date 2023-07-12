@@ -1,0 +1,51 @@
+<div class="d-flex px-sm-3 py-md-3 justify-content-start">
+    <div>
+      <h5>Menu list</h5>
+      <mat-form-field id="filter">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. water" #input>
+      </mat-form-field>
+  
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+  
+          <ng-container matColumnDef="food_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Food name </th>
+            <td mat-cell *matCellDef="let row"> {{row.food_name}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="ingredients">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ingredients </th>
+            <td mat-cell *matCellDef="let row"> {{row.ingredients}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="calorie">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Calorie </th>
+            <td mat-cell *matCellDef="let row"> {{row.calorie}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+            <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="restaurant">
+            <th mat-header-cell *matHeaderCellDef> Restaurant </th>
+            <td mat-cell *matCellDef="let row"> {{row.restaurant.shop_name}} </td>
+          </ng-container>
+  
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+  
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        
+      </div>
+    </div>
+  </div>

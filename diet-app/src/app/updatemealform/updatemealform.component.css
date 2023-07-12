@@ -1,0 +1,7 @@
+.food-header {
+    display: flex;
+    align-items: center;
+}
+.mat-form-field {
+    margin-bottom: 10px; /* Add margin bottom between form fields */
+  }

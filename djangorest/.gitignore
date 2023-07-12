@@ -1,0 +1,5 @@
+# System files
+.DS_Store
+
+# database
+db.sqlite3

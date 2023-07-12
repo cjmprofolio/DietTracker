@@ -1,0 +1,16 @@
+<div class="pt-sm-3">
+    <div class="row">
+        <div class="col-3 mx-3" >
+            <h1>Welcome back!</h1>
+            <div>
+                <app-calendar></app-calendar>
+            </div>
+        </div>
+        <div class="col mx-3">
+            <mat-tab-group>
+                <mat-tab label="Current day record"> <app-meal [mealList]="mealList" [date]="selectedDate"></app-meal> </mat-tab>
+                <mat-tab label="Add new record"> <app-updatemealform [date]="selectedDate" (mealupdated)="getSelectedMeal(selectedDate)"></app-updatemealform> </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>
