@@ -11,8 +11,4 @@ This project is an application which provides CRUD functions for tracking daily 
 #### API Endpoints
 "restaurant": "http://127.0.0.1:8000/api/restaurant/"  
 "menu": "http://127.0.0.1:8000/api/menu/"  
-<<<<<<< HEAD
 "meal": "http://127.0.0.1:8000/api/meal/"
-=======
-"meal": "http://127.0.0.1:8000/api/meal/"
->>>>>>> refs/remotes/origin/main
