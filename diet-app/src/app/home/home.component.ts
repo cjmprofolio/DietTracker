@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit{
   mealList: Meallist[]= [];
   selectedDate: Date = new Date();
 
-  constructor( private _mealService: MealService, private _dateService: DateService){};
+  constructor( private mealService: MealService, private dateService: DateService){};
 
   ngOnInit(): void {
     this.getDate();
@@ -21,14 +21,14 @@ export class HomeComponent implements OnInit{
 
   // get selected meal record
   getSelectedMeal(date:Date) {
-    this._mealService.getSelectedMeal(date).subscribe(meals =>{
+    this.mealService.getSelectedMeal(date).subscribe(meals =>{
       this.mealList= meals; 
     })
   };
 
   // get date from date service
   getDate(){
-    this._dateService.currentDate.subscribe(date=>{
+    this.dateService.currentDate.subscribe(date=>{
       this.selectedDate= date;
       this.getSelectedMeal(this.selectedDate)
     });

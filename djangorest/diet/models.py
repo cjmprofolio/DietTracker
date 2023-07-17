@@ -3,16 +3,16 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MinLengthValidator
 
 class Restaurant(models.Model):
-    shop_name= models.CharField(max_length=20, validators=[MinLengthValidator(1)])
+    place= models.CharField(max_length=20, validators=[MinLengthValidator(1)])
     location= models.CharField(max_length=50, validators=[MinLengthValidator(1)])
     created_date= models.DateTimeField(auto_now_add= True)
     lastest_revised_date= models.DateTimeField(auto_now= True)
 
     class Meta:
-        ordering=['shop_name']
+        ordering=['place']
 
     def __str__(self) -> str:
-        return f'{self.shop_name}'
+        return f'{self.place}'
 
 class Menu(models.Model):
     food_name= models.CharField(max_length=30, validators=[MinLengthValidator(1)])

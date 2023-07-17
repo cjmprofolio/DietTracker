@@ -27,17 +27,17 @@ export class MealComponent{
 
   columnsToDisplayWithExpand= ["meal", "food_name", "price", "calorie", "expand"]
 
-  constructor( private _mealService: MealService){};
+  constructor( private mealService: MealService){};
 
   
   getSelectedMeal(date:Date) {
-    this._mealService.getSelectedMeal(date).subscribe(meals =>{
+    this.mealService.getSelectedMeal(date).subscribe(meals =>{
       this.mealList= meals; 
     })
   };
 
   deleteMeal(id:any){
-    this._mealService.deleteMeal(id).subscribe(_=>{
+    this.mealService.deleteMeal(id).subscribe(_=>{
       this.getSelectedMeal(this.date);
     })
   };

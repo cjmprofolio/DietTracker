@@ -29,7 +29,7 @@
                         <mat-label>Restaurant</mat-label>
                         <mat-select formControlName="restaurant" [compareWith]="compareCategoryObjects" [errorStateMatcher]="matcher">
                             <mat-option *ngFor="let item of allRests" [value]="item">
-                                {{ item.shop_name }}-{{ item.location }}
+                                {{ item.place }}-{{ item.location }}
                             </mat-option>
                         </mat-select>
                         <mat-icon matSuffix>restaurant</mat-icon>

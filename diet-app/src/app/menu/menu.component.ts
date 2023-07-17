@@ -22,10 +22,10 @@ export class MenuComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _menuService: MenuService){};
+  constructor(private menuService: MenuService){};
 
   ngOnInit(): void {
-    this._menuService.getMenus().subscribe(data => {
+    this.menuService.getMenus().subscribe(data => {
       this.dataSource.data = data;
     });
   }

@@ -23,7 +23,7 @@ export interface Menulist{
 
 export interface Restaurantlist {
     id: number,
-    shop_name: string,
+    place: string,
     location: string,
     created_date: Date,
     lastest_revised_date: Date,

@@ -14,7 +14,7 @@ import { RestaurantService } from '../Services/restaurant.service'
 })
 export class RestaurantComponent implements OnInit, AfterViewInit{
 
-  displayedColumns: string[] = ['shop_name', 'location', 'expanded'];
+  displayedColumns: string[] = ['place', 'location', 'expanded'];
   dataSource= new MatTableDataSource<Restaurantlist>();
 
   // init timeroutid
@@ -24,15 +24,15 @@ export class RestaurantComponent implements OnInit, AfterViewInit{
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(FormGroupDirective) formRef!: FormGroupDirective;
 
-  restaurantForm= this._fb.group({
-    shop_name: ['', Validators.required],
+  restaurantForm= this.fb.group({
+    place: ['', Validators.required],
     location: ['', Validators.required],
   })
 
-  constructor(private _fb: FormBuilder, private _restService: RestaurantService,){}
+  constructor(private fb: FormBuilder, private restService: RestaurantService,){}
 
   ngOnInit(): void {
-    this._restService.getAllRestaurants().subscribe(
+    this.restService.getAllRestaurants().subscribe(
       {
         next: (restaurant) => {
           this.dataSource.data= restaurant
@@ -52,8 +52,8 @@ export class RestaurantComponent implements OnInit, AfterViewInit{
       return ans;
     }, {} as Record<keyof Restaurantlist, string | Date>);
     
-    this._restService.createRestaurant(s).subscribe(() => {
-      this._restService.getAllRestaurants().subscribe((restaurant) => {
+    this.restService.createRestaurant(s).subscribe(() => {
+      this.restService.getAllRestaurants().subscribe((restaurant) => {
         this.dataSource.data = restaurant;
       });
     });
@@ -63,8 +63,8 @@ export class RestaurantComponent implements OnInit, AfterViewInit{
 
   // delete the Restaurant and display new table
   deleteRestaurant(id: any){
-    this._restService.deleteRestaurant(id).subscribe(() => {
-      this._restService.getAllRestaurants().subscribe((restaurant) => {
+    this.restService.deleteRestaurant(id).subscribe(() => {
+      this.restService.getAllRestaurants().subscribe((restaurant) => {
         this.dataSource.data = restaurant;
       });
     })

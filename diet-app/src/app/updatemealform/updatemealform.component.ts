@@ -36,15 +36,15 @@ export class UpdatemealformComponent implements OnInit ,OnChanges{
   
   allRests: Restaurantlist[]= [];
   
-  mealform= this._fb.group({
+  mealform= this.fb.group({
     meal: ['',  [Validators.required]],
-    food: this._fb.array([
+    food: this.fb.array([
       this.createFoodgroup()
     ]),
   });
 
 
-  constructor(private _fb: FormBuilder, private _restService: RestaurantService, private _mealService: MealService,
+  constructor(private fb: FormBuilder, private restService: RestaurantService, private mealService: MealService,
     private _dateService: DateService){
   }
 
@@ -73,7 +73,7 @@ export class UpdatemealformComponent implements OnInit ,OnChanges{
   };
 
   createFoodgroup(){
-    let foodgroup= this._fb.group(
+    let foodgroup= this.fb.group(
       {restaurant: ['', [Validators.required]],
         food_name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
         ingredients: ['',[Validators.required]],
@@ -89,18 +89,18 @@ export class UpdatemealformComponent implements OnInit ,OnChanges{
     mealform['date']= this._dateService.dateChange(this.date);
     // update meal record
     if (this.element) {
-      this._mealService.updateMeal(mealform, this.element.id).subscribe(
+      this.mealService.updateMeal(mealform, this.element.id).subscribe(
         (form)=>{console.log(form)}
       );
     }
     // create new meal record
     else {
-      this._mealService.createMeal(mealform).subscribe((form)=>
+      this.mealService.createMeal(mealform).subscribe((form)=>
     {console.log(form)});
     // reset to default meal form
-    this.mealform= this._fb.group({
+    this.mealform= this.fb.group({
       meal: ['',  [Validators.required]],
-      food: this._fb.array([
+      food: this.fb.array([
         this.createFoodgroup()
       ]),
     });
@@ -109,7 +109,7 @@ export class UpdatemealformComponent implements OnInit ,OnChanges{
   };
 
   getAllRestaurants(){
-    this._restService.getAllRestaurants().pipe(
+    this.restService.getAllRestaurants().pipe(
       map((rest)=>{
         this.allRests= rest;
         })
@@ -128,9 +128,9 @@ export class UpdatemealformComponent implements OnInit ,OnChanges{
 
     for (let i= 0; i < len; i++) {
       let item= items[i]
-      let restaurantValue = { id: item.restaurant.id, shop_name: item.restaurant.shop_name, location: item.restaurant.location };
+      let restaurantValue = { id: item.restaurant.id, shop_name: item.restaurant.place, location: item.restaurant.location };
       // create new formarray and set value
-      let newForm= this._fb.group({
+      let newForm= this.fb.group({
         restaurant: restaurantValue,
         food_name: [item.food_name, [Validators.minLength(1), Validators.maxLength(30)]],
         ingredients: item.ingredients.toString(),
