@@ -1,6 +1,6 @@
 ### DietTracker
 
-A web application built with Angular and Django.
+A web application built with Angular and Djangos.
 
 #### Description
 This project is an application which provides CRUD functions for tracking daily diet combines Angular as frontend and Django RESTful API as backend.
